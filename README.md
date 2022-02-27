@@ -25,8 +25,12 @@ gir clone https://github.com/iswilljr/config-env-file.git
 npx config --file /path/to/your/config/file
 ```
 
+---
+
 ## Help
 
 ```bash
 npx config --help
 ```
+
+---
