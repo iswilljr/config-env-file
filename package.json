@@ -13,8 +13,14 @@
   "license": "ISC",
   "description": "A command line to generate a .env.local based on a Config",
   "dependencies": {
-    "commander": "^9.0.0",
-    "inquirer": "^8.2.0"
+    "commander": "^9.0.0"
   },
-  "devDependencies": {}
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iswilljr/config-env-file.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iswilljr/config-env-file/issues"
+  },
+  "homepage": "https://github.com/iswilljr/config-env-file#readme"
 }
