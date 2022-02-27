@@ -1,0 +1,20 @@
+{
+  "name": "config-env-file",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "config": "src/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "iswilljr",
+  "license": "ISC",
+  "description": "A command line to generate a .env.local based on a Config",
+  "dependencies": {
+    "commander": "^9.0.0",
+    "inquirer": "^8.2.0"
+  },
+  "devDependencies": {}
+}
