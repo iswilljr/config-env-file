@@ -14,7 +14,7 @@ npm i config-env-file -D
 yarn add config-env-file -D 
 
 // or clone
-gir clone https://github.com/iswilljr/config-env-file.git
+git clone https://github.com/iswilljr/config-env-file.git
 ```
 
 ---
