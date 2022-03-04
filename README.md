@@ -6,10 +6,10 @@ A command line to generate a .env.local based on a Config
 
 ## Go to:
 
-- [Install](https://github.com/iswilljr/config-env-file#install)
-- [Usage](https://github.com/iswilljr/config-env-file#usage)
-- [Help](https://github.com/iswilljr/config-env-file#help)
-- [Examples](https://github.com/iswilljr/config-env-file#examples)
+- [Install](#install)
+- [Usage](#usage)
+- [Help](#help)
+- [Examples](#examples)
 
 ---
 
