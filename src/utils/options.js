@@ -1,3 +1,4 @@
+// options
 const file = {
   flags: "-f, --file <file>",
   desc: "File path where the config is",
@@ -25,4 +26,9 @@ const project = {
   default: "process",
 };
 
-module.exports = { file, destination, extension, template, project };
+const merge = {
+  flags:"-m, --merge <file>",
+  desc:"merge a given env file with the new config"
+}
+
+module.exports = { file, destination, extension, template, project, merge };

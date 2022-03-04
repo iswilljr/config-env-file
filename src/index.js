@@ -1,14 +1,16 @@
 #!/usr/bin/env node
+const { exec: run } = require("child_process");
 const fs = require("fs/promises");
 const path = require("path");
 const { program } = require("commander");
 const { options, noFile, noConfig, generate } = require("./utils");
 
 const PWD = process.env.PWD;
+const isAbsolute = (/** @type {string} */ filePath) =>
+  path.isAbsolute(filePath) ? filePath : path.resolve(PWD, filePath);
+const entries = (/** @type {string} */ data) => data.split("\n").map((_) => _.split("="));
 
-program
-  .version("1.0.0")
-  .description("A command line to generate a .env.local based on a Config");
+program.version("1.0.0").description("A command line to generate a .env.local based on a Config");
 
 program
   .option(...Object.values(options.file))
@@ -16,20 +18,28 @@ program
   .option(...Object.values(options.extension))
   .option(...Object.values(options.template))
   .option(...Object.values(options.project))
-  .action((opt) => {
-    let { file, destination: to, extension: ext, template, project } = opt;
+  .option(...Object.values(options.merge))
+  .action(({ file, destination: to, extension: ext, template, project, merge }) => {
     if (!file) throw noFile;
     if (to === ".") to = PWD;
     try {
-      const filePath = path.isAbsolute(file) ? file : path.resolve(PWD, file);
+      const filePath = isAbsolute(file);
       const config = require(filePath);
       if (typeof config !== "object") throw noConfig;
+      const filePath2 = path.join(isAbsolute(to), `.env.${ext}`);
       const data = generate(config, template, "env");
-      const filePath2 = path.join(
-        path.isAbsolute(to) ? to : path.resolve(PWD, to),
-        `.env.${ext}`
-      );
-      fs.writeFile(filePath2, data);
+      if (merge)
+        run("cat " + merge, (error, envFile, err) => {
+          if (err) throw err;
+          if (error) throw error;
+          const mergedConfig = {};
+          entries(envFile + "\n" + data).map((_) => (mergedConfig[_[0]] = _[1]));
+          const newData = generate(mergedConfig, template, "env");
+          fs.writeFile(filePath2, newData);
+        });
+      else {
+        fs.writeFile(filePath2, data);
+      }
       const newConfig = `const config = {
   ${generate(config, template, "file", project).split("\n").join(",\n  ")}
 }`;
