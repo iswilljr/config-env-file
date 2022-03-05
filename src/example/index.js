@@ -1,11 +1,11 @@
 // Config - Firebase Config
 const firebaseConfig = {
-  apiKey: "example",
-  authDomain: "example.firebaseapp.com",
-  projectId: "example",
-  storageBucket: "example.appspot.com",
-  messagingSenderId: "example",
-  appId: "1:example:web:example",
+	apiKey: "example",
+	authDomain: "example.firebaseapp.com",
+	projectId: "example",
+	storageBucket: "example.appspot.com",
+	messagingSenderId: "example",
+	appId: "1:example:web:example",
 };
 
 /* Examples

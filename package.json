@@ -1,26 +1,37 @@
 {
-  "name": "config-env-file",
-  "version": "1.1.0",
-  "main": "index.js",
-  "bin": {
-    "config": "src/index.js"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": ["cli","commander","env","config","env-file"],
-  "author": "iswilljr",
-  "license": "ISC",
-  "description": "A command line to generate a .env.local based on a Config",
-  "dependencies": {
-    "commander": "^9.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iswilljr/config-env-file.git"
-  },
-  "bugs": {
-    "url": "https://github.com/iswilljr/config-env-file/issues"
-  },
-  "homepage": "https://github.com/iswilljr/config-env-file#readme"
+	"name": "config-env-file",
+	"version": "1.1.0",
+	"main": "index.js",
+	"bin": {
+		"config": "src/index.js"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"format": "prettier --config ./.prettierrc ./src/**/*.js -w"
+	},
+	"keywords": [
+		"cli",
+		"commander",
+		"env",
+		"config",
+		"env-file"
+	],
+	"author": "iswilljr",
+	"license": "ISC",
+	"description": "A command line to generate a .env.local based on a Config",
+	"dependencies": {
+		"commander": "^9.0.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/iswilljr/config-env-file.git"
+	},
+	"bugs": {
+		"url": "https://github.com/iswilljr/config-env-file/issues"
+	},
+	"homepage": "https://github.com/iswilljr/config-env-file#readme",
+	"devDependencies": {
+		"eslint": "^8.10.0",
+		"prettier": "^2.5.1"
+	}
 }
