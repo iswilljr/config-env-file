@@ -1,3 +1,5 @@
+const { Option } = require("commander");
+
 // options
 const file = {
 	flags: "-f, --file <file>",
@@ -20,11 +22,12 @@ const template = {
 	desc: "Template to vars' name (example: [[REACT_APP_KEY, REACT_APP_API], [VITE_APP_KEY,VITE_APP_API]])",
 };
 
-const project = {
-	flags: "-p, --project <type>",
-	desc: "Project type (options: [process, import], example: [process.env.KEY, import.meta.env.KEY])",
-	default: "process",
-};
+const project = new Option(
+	"-p, --project <type>",
+	"Project type (options: [process, import], example: [process.env.KEY, import.meta.env.KEY])"
+)
+	.choices(["process", "import"])
+	.default("process");
 
 const merge = {
 	flags: "-m, --merge <file>",

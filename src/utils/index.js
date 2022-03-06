@@ -1,5 +1,5 @@
 const options = require("./options");
-const { noFile, noConfig } = require("./errors");
 const generate = require("./generate");
+const { entries, noConfig, isAbsolute } = require("./fn");
 
-module.exports = { options, noFile, noConfig, generate };
+module.exports = { options, generate, entries, noConfig, isAbsolute };

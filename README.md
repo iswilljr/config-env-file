@@ -112,7 +112,7 @@ npx config -f src/example/index.js -d . -e prod -t react_app -p process -m .env.
 This will merge our .env.local file with the config and generate a .env.prod file in root of our project, like this:
 
 ```env
-REACT_APP_DOMAIN=123
+REACT_APP_DOMAIN=http://localhost:3001
 REACT_APP_APIKEY=example
 REACT_APP_AUTHDOMAIN=example.firebaseapp.com
 REACT_APP_PROJECTID=example
