@@ -11,12 +11,12 @@ const PWD = process.env.PWD;
 program
 	.version(version)
 	.description("A command line to generate a .env.local based on a Config")
-	.requiredOption(...Object.values(options.file))
-	.option(...Object.values(options.destination), PWD)
-	.option(...Object.values(options.extension))
-	.option(...Object.values(options.template))
+	.requiredOption(...options.file)
+	.option(...options.destination, PWD)
+	.option(...options.extension)
+	.option(...options.template)
 	.addOption(options.project)
-	.option(...Object.values(options.merge))
+	.option(...options.merge)
 	.showSuggestionAfterError()
 	.action(({ file, destination: to, extension: ext, template, project, merge }) => {
 		if (to === ".") to = PWD;
