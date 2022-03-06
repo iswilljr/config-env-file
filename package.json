@@ -7,7 +7,9 @@
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"format": "prettier --config ./.prettierrc ./src/**/*.js -w"
+		"format": "prettier --config ./.prettierrc ./src/**/*.js -w",
+    "lint": "eslint --config ./.eslintrc.json ./src/**/*.{ts,js}",
+    "lint:fix": "eslint --config ./.eslintrc.json ./src/**/*.{ts,js} --fix"
 	},
 	"keywords": [
 		"cli",
@@ -31,7 +33,12 @@
 	},
 	"homepage": "https://github.com/iswilljr/config-env-file#readme",
 	"devDependencies": {
-		"eslint": "^8.10.0",
+		"eslint": "^7.32.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-config-standard": "^16.0.3",
+		"eslint-plugin-import": "^2.25.4",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-promise": "^5.2.0",
 		"prettier": "^2.5.1"
 	}
 }

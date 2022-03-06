@@ -7,18 +7,18 @@ const destination = ["-d, --destination <destination>", "Destination path to env
 
 const extension = [
 	"-e, --extension <extension>",
-	"extension to env file name (example: [env.prod, env.local])",
+	"extension to env file name (example: env.prod, env.local)",
 	"local",
 ];
 
 const template = [
 	"-t, --template <template>",
-	"Template to vars' name (example: [[REACT_APP_KEY, REACT_APP_API], [VITE_APP_KEY,VITE_APP_API]])",
+	"Template to vars' name (example: REACT_APP_KEY, REACT_APP_API, VITE_APP_KEY,VITE_APP_API)",
 ];
 
 const project = new Option(
 	"-p, --project <type>",
-	"Project type (options: [process, import], example: [process.env.KEY, import.meta.env.KEY])"
+	"Project type (example: [process.env.KEY, import.meta.env.KEY])"
 )
 	.choices(["process", "import"])
 	.default("process");
