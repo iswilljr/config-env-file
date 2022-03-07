@@ -3,7 +3,6 @@ const path = require("path");
 
 const noConfig = "error: config must be an object or JSON";
 
-
 const isAbsolute = (/** @type {string} */ filePath) =>
 	path.isAbsolute(filePath) ? filePath : path.resolve(PWD, filePath);
 
