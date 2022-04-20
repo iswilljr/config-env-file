@@ -12,7 +12,7 @@ program
 	.version(version)
 	.description("A command line to generate a .env.local based on a Config")
 	.requiredOption(...options.file)
-	.option(...options.destination, PWD)
+	.option(...options.destination, ".")
 	.option(...options.extension)
 	.option(...options.template)
 	.addOption(options.project)
@@ -30,17 +30,16 @@ program
 				run("cat " + merge, (error, envFile, err) => {
 					if (err) program.error(err);
 					if (error) program.error(error);
-					const mergedConfig = {};
-					entries(envFile + "\n" + data).map((_) => (mergedConfig[_[0]] = _[1]));
+					const mergedConfig = Object.fromEntries(entries(envFile + "\n" + data));
 					const newData = generate(mergedConfig, template, "env");
 					fs.writeFile(filePath, newData);
 				});
 			else {
 				fs.writeFile(filePath, data);
 			}
-			const newConfig = `const config = {
-  ${generate(config, template, "file", project).split("\n").join(",\n  ")}
-}`;
+			const newConfig = `const config = { \n  ${generate(config, template, "file", project)
+				.split("\n")
+				.join(",\n  ")}\n}`;
 			console.log("Check your .env file\nYour config:");
 			console.log(newConfig);
 		} catch (error) {
