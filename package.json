@@ -1,15 +1,16 @@
 {
 	"name": "config-env-file",
-	"version": "1.2.1",
+	"version": "2.0.0",
 	"main": "index.js",
 	"bin": {
 		"config": "src/index.js"
 	},
+	"type": "module",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"format": "prettier --config ./.prettierrc ./src/**/*.js -w",
-    "lint": "eslint --config ./.eslintrc.json ./src/**/*.{ts,js}",
-    "lint:fix": "eslint --config ./.eslintrc.json ./src/**/*.{ts,js} --fix"
+		"lint": "eslint --config ./.eslintrc.json ./src/**/*.{ts,js}",
+		"lint:fix": "eslint --config ./.eslintrc.json ./src/**/*.{ts,js} --fix"
 	},
 	"keywords": [
 		"cli",

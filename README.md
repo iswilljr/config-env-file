@@ -4,7 +4,7 @@ A command line to generate a .env.local based on a Config
 
 ---
 
-## Go to:
+## Go to
 
 - [Install](#install)
 - [Usage](#usage)
@@ -13,7 +13,7 @@ A command line to generate a .env.local based on a Config
 
 ---
 
-## Install:
+## Install
 
 ```bash
 // npm
@@ -21,14 +21,11 @@ npm i config-env-file -D
 
 // yarn
 yarn add config-env-file -D
-
-// or clone
-git clone https://github.com/iswilljr/config-env-file.git
 ```
 
 ---
 
-## Usage:
+## Usage
 
 ```bash
 npx config --file /path/to/your/config/file
@@ -50,25 +47,23 @@ npx config --help
 
 In this example we have the next config file:
 
-```javascript
-const firebaseConfig = {
-  apiKey: "example",
-  authDomain: "example.firebaseapp.com",
-  projectId: "example",
-  storageBucket: "example.appspot.com",
-  messagingSenderId: "example",
-  appId: "1:example:web:example",
-};
-
-module.exports = firebaseConfig;
+```json
+{
+  "apiKey": "example",
+  "authDomain": "example.firebaseapp.com",
+  "projectId": "example",
+  "storageBucket": "example.appspot.com",
+  "messagingSenderId": "example",
+  "appId": "1:example:web:example",
+}
 ```
 
-File path: src/example/index.js
+File path: ./config.json
 
 Then, run the next command:
 
 ```bash
-npx config -f src/example/index.js
+npx config -f ./config.json
 ```
 
 This will generate a .env.local file in root of our project, like this:
@@ -106,7 +101,18 @@ DOMAIN=http://localhost:3001
 Then, run the next command:
 
 ```bash
-npx config -f src/example/index.js -d . -e prod -t react_app -p process -m .env.local
+npx config -f ./config.json -d . -e prod -t react_app -p process -m .env.local
+```
+
+Flags:
+
+```javascript
+-f ./config.json // file path
+-d . // destination => current directory
+-e prod // file extension => .env.prod
+-t react_app // KEY => REACT_APP_KEY
+-p process // output => proccess.env.${KEY}
+-m .env.local // merge with an existing env file
 ```
 
 This will merge our .env.local file with the config and generate a .env.prod file in root of our project, like this:

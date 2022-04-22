@@ -15,4 +15,4 @@ const generateEnv = (config, template, typeConfig, project) =>
 		})
 		.join("\n");
 
-module.exports = generateEnv;
+export default generateEnv;
