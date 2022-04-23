@@ -1,13 +1,14 @@
-function normalize(string) {
-	return string.toUpperCase().replace(/-/g, "_");
+function normalize(string, u = false) {
+	const s = string.replace(/-|\s/g, "_");
+	return u ? s.toUpperCase() : s;
 }
 
 const generateEnv = (config, template, typeConfig, project) =>
 	Object.entries(config)
 		.map((v) => {
 			const isEnv = typeConfig === "env";
-			const name = isEnv ? normalize(v[0]) : v[0];
-			const temp = template && !name.includes(normalize(template)) ? normalize(template) + "_" : "";
+			const name = isEnv ? normalize(v[0], true) : normalize(v[0]);
+			const temp = template && !name.includes(normalize(template, true)) ? `${normalize(template, true)}_` : "";
 			const value = isEnv ? v[1] : "";
 			const varName = `${temp}${name}`.toUpperCase();
 			const type = project === "process" ? "process.env." : "import.meta.env.";
