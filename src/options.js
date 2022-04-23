@@ -1,14 +1,13 @@
 import { Option } from "commander";
 import { pathFrom } from "./fn.js";
 
-const dirname = process.env.PWD;
 // options
 export const file = ["-f, --file <file>", "File path where the config is", (value) => pathFrom(value)];
 export const destination = [
 	"-d, --destination <destination>",
 	"Destination path to env file",
 	".",
-	(value) => (value === "." ? dirname : pathFrom(value)),
+	(value) => (value === "." ? process.cwd() : pathFrom(value)),
 ];
 export const extension = [
 	"-e, --extension <extension>",
