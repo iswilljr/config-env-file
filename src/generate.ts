@@ -1,9 +1,9 @@
-function normalize(string, u = false) {
+function normalize(string: string, u: boolean = false) {
 	const s = string.replace(/-|\s/g, "_");
 	return u ? s.toUpperCase() : s;
 }
 
-const generateEnv = (config, template, typeConfig, project) =>
+const generateEnv = (config: object, template: string, typeConfig: string, project?: string) =>
 	Object.entries(config)
 		.map((v) => {
 			const isEnv = typeConfig === "env";

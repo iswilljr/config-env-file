@@ -1,45 +1,33 @@
 {
-	"name": "config-env-file",
-	"version": "2.0.2",
-	"main": "index.js",
+	"name": "config-env-file-ts",
+	"version": "2.0.3",
+	"description": "",
+	"main": "src/index.js",
 	"bin": {
-		"config": "src/index.js"
+		"config": "src/bin/index.js"
 	},
-	"type": "module",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"format": "prettier --config ./.prettierrc ./src/**/*.js -w",
-		"lint": "eslint --config ./.eslintrc.json ./src/**/*.{ts,js}",
-		"lint:fix": "eslint --config ./.eslintrc.json ./src/**/*.{ts,js} --fix"
+		"start": "tsc && node src/index.js",
+		"tsc": "tsc --outDir src"
 	},
-	"keywords": [
-		"cli",
-		"commander",
-		"env",
-		"config",
-		"env-file"
-	],
-	"author": "iswilljr",
+	"keywords": [],
+	"author": "",
 	"license": "ISC",
-	"description": "A command line to generate a .env.local based on a Config",
-	"dependencies": {
-		"commander": "^9.0.0"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/iswilljr/config-env-file.git"
-	},
-	"bugs": {
-		"url": "https://github.com/iswilljr/config-env-file/issues"
-	},
-	"homepage": "https://github.com/iswilljr/config-env-file#readme",
 	"devDependencies": {
-		"eslint": "^7.32.0",
+		"@types/node": "^17.0.29",
+		"@typescript-eslint/eslint-plugin": "^5.21.0",
+		"@typescript-eslint/parser": "^5.21.0",
+		"eslint": "^8.14.0",
 		"eslint-config-prettier": "^8.5.0",
-		"eslint-config-standard": "^16.0.3",
-		"eslint-plugin-import": "^2.25.4",
-		"eslint-plugin-node": "^11.1.0",
-		"eslint-plugin-promise": "^5.2.0",
-		"prettier": "^2.5.1"
-	}
+		"eslint-config-standard": "^17.0.0",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-n": "^15.2.0",
+		"eslint-plugin-promise": "^6.0.0",
+		"prettier": "^2.6.2"
+	},
+	"dependencies": {
+		"commander": "^9.2.0"
+	},
+	"types": "./src/index.d.ts"
 }
