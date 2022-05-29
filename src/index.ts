@@ -17,8 +17,8 @@ const defaultConfig = {
 	merge: "",
 };
 
-export default async function (file: string, config: Options): Promise<void> {
-	const _config: Config = Object.assign({}, defaultConfig, config, { file });
+export default async function (file: string, options: Options): Promise<void> {
+	const _config: Config = Object.assign({}, defaultConfig, options, { file });
 	if (_config.destination === ".") _config.destination = process.cwd();
 	if (!path.isAbsolute(_config.file)) _config.file = path.join(process.cwd(), _config.file);
 	if (!_config.merge) _config.merge = "";
