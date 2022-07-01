@@ -1,15 +1,9 @@
-import path from "path";
-import action, { Config } from "./config";
+import { action, Config } from "./program";
 
-export type Options = {
-	destination?: string;
-	extension?: string;
-	template?: string;
-	project?: "process" | "import";
-	merge?: string;
-};
+export interface Options extends Partial<Omit<Config, "file">> {}
 
-const defaultConfig = {
+const defaultConfig: Config = {
+	file: "",
 	destination: ".",
 	extension: "local",
 	template: "",
@@ -17,14 +11,6 @@ const defaultConfig = {
 	merge: "",
 };
 
-export default async function (file: string, options: Options): Promise<void> {
-	const _config: Config = Object.assign({}, defaultConfig, options, { file });
-	if (_config.destination === ".") _config.destination = process.cwd();
-	if (!path.isAbsolute(_config.file)) _config.file = path.join(process.cwd(), _config.file);
-	if (!_config.merge) _config.merge = "";
-	else if (!path.isAbsolute(_config.merge)) _config.merge = path.join(process.cwd(), _config.merge);
-	if (_config.project !== "process" && _config.project !== "import")
-		throw new Error("Project type must be process or import");
-	if (!_config.file) throw new Error("File is required");
-	action(_config);
-}
+const configEnvFile = (file: string, options?: Options) => action({ ...defaultConfig, ...options, file });
+
+export default configEnvFile;

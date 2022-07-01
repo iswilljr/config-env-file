@@ -16,10 +16,10 @@ A command line to generate a .env.local based on a Config
 ## Install
 
 ```bash
-// npm
+# npm
 npm i config-env-file -D
 
-// yarn
+# yarn
 yarn add config-env-file -D
 ```
 
@@ -28,7 +28,11 @@ yarn add config-env-file -D
 ## Usage
 
 ```bash
-npx config --file /path/to/your/config/file
+# npm
+npx cef --file /path/to/your/config/file
+
+# yarn
+yarn cef --file /path/to/your/config/file
 ```
 
 ---
@@ -36,7 +40,11 @@ npx config --file /path/to/your/config/file
 ## Help
 
 ```bash
-npx config --help
+# npm
+npx cef --help
+
+# yarn
+yarn cef --help
 ```
 
 ---
@@ -63,7 +71,11 @@ File path: ./config.json
 Then, run the next command:
 
 ```bash
-npx config -f ./config.json
+# npm
+npx cef -f ./config.json
+
+# yarn
+yarn cef -f ./config.json
 ```
 
 This will generate a .env.local file in root of our project, like this:
@@ -101,7 +113,11 @@ DOMAIN=http://localhost:3001
 Then, run the next command:
 
 ```bash
-npx config -f ./config.json -d . -e prod -t react_app -p process -m .env.local
+# npm
+npx cef -f ./config.json -d . -e prod -t react_app -p process -m .env.local
+
+# yarn
+yarn cef -f ./config.json -d . -e prod -t react_app -p process -m .env.local
 ```
 
 Flags:
