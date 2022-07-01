@@ -16,7 +16,7 @@ export type Config = {
 	merge: string;
 };
 
-program.version("2.0.2").description("A command line to generate a .env.local based on a Config");
+program.version("3.0.1").description("A command line to generate a .env.local based on a Config");
 
 program.requiredOption("-f, --file <file>", "The config file to use");
 program.option("-d, --destination <destination>", "Destination path to env file", ".");
