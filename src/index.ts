@@ -22,15 +22,17 @@ type GenerateOptions = {
 const generate = (config: object, { temp = "", type = "env", env = "process", sep = "\n" }: GenerateOptions = {}) => {
   const isEnv = type === "env";
   const template = constantCase(temp);
-  return Object.entries(config)
-    .map((v) => {
-      const name = constantCase(v[0]);
-      const key = `${template && !name.includes(template) ? `${template}_` : ""}${name}`;
-      return isEnv
-        ? `${key}=${v[1]}`
-        : `${camelCase(name)}: ${env === "process" ? "process.env." : "import.meta.env."}${key}`;
-    })
-    .join(sep);
+  return (
+    Object.entries(config)
+      .map((v) => {
+        const name = constantCase(v[0]);
+        const key = `${template && !name.includes(template) ? `${template}_` : ""}${name}`;
+        return isEnv
+          ? `${key}=${v[1]}`
+          : `${camelCase(name)}: ${env === "process" ? "process.env." : "import.meta.env."}${key}`;
+      })
+      .join(sep) + (isEnv ? "\n" : "")
+  );
 };
 
 const configEnvFile = async (file: string, { destination, extension, template, env, merge }: Options = {}) => {

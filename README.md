@@ -87,13 +87,13 @@ Options:
 ```javascript
 ./config.json // file path
 -d . // destination => current directory
--e development // file extension => .env.prod
+-e development // file extension => .env.development
 -t next_public // KEY => NEXT_PUBLIC_KEY
 -E import // output => import.meta.env.KEY
 -m .env.local // merge with an existing env file
 ```
 
-This will merge our .env.local file with the config and generate a .env.prod file in root of our project, like this:
+This will merge our .env.local file with the config and generate a .env.development file in root of our project, like this:
 
 ```env
 NEXT_PUBLIC_DOMAIN=http://localhost:3001

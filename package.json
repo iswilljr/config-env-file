@@ -1,6 +1,6 @@
 {
   "name": "config-env-file",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "description": "A command line to generate a .env file based on a Config",
   "main": "lib/index.js",
   "bin": {
