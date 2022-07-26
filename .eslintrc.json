@@ -1,15 +1,17 @@
 {
-	"env": {
-		"commonjs": true,
-		"es2021": true,
-		"node": true
-	},
-	"extends": ["standard", "prettier"],
-	"parser": "@typescript-eslint/parser",
-	"parserOptions": {
-		"ecmaVersion": "latest"
-	},
-	"plugins": ["@typescript-eslint"],
-	"rules": {},
-	"ignorePatterns": "src"
+  "env": {
+    "commonjs": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["standard", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "plugins": ["@typescript-eslint", "prettier"],
+  "rules": {
+    "prettier/prettier": "error"
+  },
+  "ignorePatterns": ["node_modules/", "lib/", "**/*.js"]
 }

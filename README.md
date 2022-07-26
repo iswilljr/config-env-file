@@ -1,53 +1,22 @@
 # CONFIG ENV FILE
 
-A command line to generate a .env.local based on a Config
-
----
-
-## Go to
-
-- [Install](#install)
-- [Usage](#usage)
-- [Help](#help)
-- [Examples](#examples)
-
----
+A command line to generate a .env file based on a Config
 
 ## Install
 
 ```bash
 # npm
-npm i config-env-file -D
+npm install -g config-env-file
 
 # yarn
-yarn add config-env-file -D
+yarn global add config-env-file -D
 ```
-
----
 
 ## Usage
 
 ```bash
-# npm
-npx cef --file /path/to/your/config/file
-
-# yarn
-yarn cef --file /path/to/your/config/file
+cef /path/to/your/config/file [options]
 ```
-
----
-
-## Help
-
-```bash
-# npm
-npx cef --help
-
-# yarn
-yarn cef --help
-```
-
----
 
 ## Examples
 
@@ -56,50 +25,47 @@ yarn cef --help
 In this example we have the next config file:
 
 ```json
+// File path: ./config.json
 {
   "apiKey": "example",
   "authDomain": "example.firebaseapp.com",
   "projectId": "example",
   "storageBucket": "example.appspot.com",
   "messagingSenderId": "example",
-  "appId": "1:example:web:example",
+  "appId": "1:example:web:example"
 }
 ```
-
-File path: ./config.json
 
 Then, run the next command:
 
 ```bash
-# npm
-npx cef -f ./config.json
-
-# yarn
-yarn cef -f ./config.json
+cef ./config.json
 ```
 
 This will generate a .env.local file in root of our project, like this:
 
 ```env
-APIKEY=example
-AUTHDOMAIN=example.firebaseapp.com
-PROJECTID=example
-STORAGEBUCKET=example.appspot.com
-MESSAGINGSENDERID=example
-APPID=1:example:web:example
+API_KEY=example
+AUTH_DOMAIN=example.firebaseapp.com
+PROJECT_ID=example
+STORAGE_BUCKET=example.appspot.com
+MESSAGING_SENDER_ID=example
+APP_ID=1:example:web:example
 ```
 
 Output:
 
 ```javascript
-const config = {
-  apiKey: process.env.APIKEY,
-  authDomain: process.env.AUTHDOMAIN,
-  projectId: process.env.PROJECTID,
-  storageBucket: process.env.STORAGEBUCKET,
-  messagingSenderId: process.env.MESSAGINGSENDERID,
-  appId: process.env.APPID,
-};
+// Check your .env.local file
+// Your config:
+const config = { 
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID
+}
 ```
 
 ### Full example
@@ -113,45 +79,50 @@ DOMAIN=http://localhost:3001
 Then, run the next command:
 
 ```bash
-# npm
-npx cef -f ./config.json -d . -e prod -t react_app -p process -m .env.local
-
-# yarn
-yarn cef -f ./config.json -d . -e prod -t react_app -p process -m .env.local
+cef ./config.json -d . -e development -t next_public -E import -m .env.local
 ```
 
-Flags:
+Options:
 
 ```javascript
--f ./config.json // file path
+./config.json // file path
 -d . // destination => current directory
--e prod // file extension => .env.prod
--t react_app // KEY => REACT_APP_KEY
--p process // output => proccess.env.${KEY}
+-e development // file extension => .env.prod
+-t next_public // KEY => NEXT_PUBLIC_KEY
+-E import // output => import.meta.env.KEY
 -m .env.local // merge with an existing env file
 ```
 
 This will merge our .env.local file with the config and generate a .env.prod file in root of our project, like this:
 
 ```env
-REACT_APP_DOMAIN=http://localhost:3001
-REACT_APP_APIKEY=example
-REACT_APP_AUTHDOMAIN=example.firebaseapp.com
-REACT_APP_PROJECTID=example
-REACT_APP_STORAGEBUCKET=example.appspot.com
-REACT_APP_MESSAGINGSENDERID=example
-REACT_APP_APPID=1:example:web:example
+NEXT_PUBLIC_DOMAIN=http://localhost:3001
+NEXT_PUBLIC_API_KEY=example
+NEXT_PUBLIC_AUTH_DOMAIN=example.firebaseapp.com
+NEXT_PUBLIC_PROJECT_ID=example
+NEXT_PUBLIC_STORAGE_BUCKET=example.appspot.com
+NEXT_PUBLIC_MESSAGING_SENDER_ID=example
+NEXT_PUBLIC_APP_ID=1:example:web:example
 ```
 
 Output:
 
 ```javascript
-const config = {
-  apiKey: process.env.REACT_APP_APIKEY,
-  authDomain: process.env.REACT_APP_AUTHDOMAIN,
-  projectId: process.env.REACT_APP_PROJECTID,
-  storageBucket: process.env.REACT_APP_STORAGEBUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID,
-  appId: process.env.REACT_APP_APPID,
-};
+// Check your .env.development file
+// Your config:
+const config = { 
+  domain: import.meta.env.NEXT_PUBLIC_DOMAIN,
+  apiKey: import.meta.env.NEXT_PUBLIC_API_KEY,
+  authDomain: import.meta.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: import.meta.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: import.meta.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: import.meta.env.NEXT_PUBLIC_APP_ID
+}
+```
+
+## Help
+
+```bash
+cef --help
 ```
