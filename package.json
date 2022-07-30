@@ -1,61 +1,37 @@
 {
-  "name": "config-env-file",
-  "version": "3.1.0",
-  "description": "A command line to generate a .env file based on a Config",
-  "main": "lib/index.js",
-  "bin": {
-    "cef": "lib/bin.js"
-  },
-  "scripts": {
-    "build": "yarn typecheck && rimraf lib && tsc",
-    "typecheck": "tsc --noEmit",
-    "prepare": "yarn build"
-  },
-  "keywords": [
-    "cli",
-    "commander",
-    "dotenv",
-    "env",
-    "config",
-    "env-file"
-  ],
-  "author": "iswilljr",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^17.0.29",
-    "@typescript-eslint/eslint-plugin": "^5.21.0",
-    "@typescript-eslint/parser": "^5.21.0",
-    "eslint": "^8.14.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.2.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-promise": "^6.0.0",
-    "prettier": "^2.6.2",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.7.4"
-  },
-  "dependencies": {
-    "camel-case": "^4.1.2",
-    "commander": "^9.2.0",
-    "constant-case": "^3.0.4",
-    "dotenv": "^16.0.1"
-  },
-  "files": [
-    "lib",
-    "README.md"
-  ],
-  "types": "./lib/index.d.ts",
-  "directories": {
-    "lib": "lib"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iswilljr/config-env-file.git"
-  },
-  "bugs": {
-    "url": "https://github.com/iswilljr/config-env-file/issues"
-  },
-  "homepage": "https://github.com/iswilljr/config-env-file#readme"
+	"name": "config-env-file",
+	"version": "0.0.2-experimental",
+	"description": "A command line to generate a .env file based on a Config",
+	"license": "ISC",
+	"main": "lib/index.js",
+	"author": "iswilljr",
+	"type": "module",
+	"types": "./lib/index.d.ts",
+	"files": [
+		"lib",
+		"README.md"
+	],
+	"bin": {
+		"cef": "lib/bin.js"
+	},
+	"scripts": {
+		"build": "tsc && rimraf lib/bin.d.ts && prettier lib --write",
+		"prepublishOnly": "yarn build"
+	},
+	"keywords": [
+		"config",
+		"env"
+	],
+	"dependencies": {
+		"no-case": "^3.0.4",
+		"sade": "^1.8.1"
+	},
+	"devDependencies": {
+		"@types/node": "17.0.29",
+		"prettier": "2.6.2",
+		"rimraf": "3.0.2",
+		"typescript": "4.7.4"
+	},
+	"repository": "git+https://github.com/iswilljr/config-env-file.git",
+	"bugs": "https://github.com/iswilljr/config-env-file/issues"
 }

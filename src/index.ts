@@ -1,59 +1,44 @@
-import { readFile, writeFile } from "fs/promises";
-import { resolve } from "path";
-import { parse } from "dotenv";
-import { constantCase } from "constant-case";
-import { camelCase } from "camel-case";
+import {readFile, writeFile} from 'fs/promises'
+import {resolve} from 'path'
+import {noCase as c} from 'no-case'
 
-type Env = "process" | "import";
+const constant = (s: string) => c(s, {delimiter: '_', transform: str => str.toUpperCase()})
+const camel = (s: string) =>
+	c(s, {delimiter: '', transform: (s, i) => (i === 0 ? s.toLowerCase() : `${s.charAt(0)}${s.slice(1).toLowerCase()}`)})
+
 type Options = {
-  destination?: string;
-  extension?: string;
-  template?: string;
-  env?: Env;
-  merge?: string;
-};
-type GenerateOptions = {
-  temp?: string;
-  type?: "env" | "file";
-  env?: Env;
-  sep?: string;
-};
+	destination?: string
+	extension?: string
+	prefix?: string
+	env?: 'process' | 'import'
+}
 
-const generate = (config: object, { temp = "", type = "env", env = "process", sep = "\n" }: GenerateOptions = {}) => {
-  const isEnv = type === "env";
-  const template = constantCase(temp);
-  return (
-    Object.entries(config)
-      .map((v) => {
-        const name = constantCase(v[0]);
-        const key = `${template && !name.includes(template) ? `${template}_` : ""}${name}`;
-        return isEnv
-          ? `${key}=${v[1]}`
-          : `${camelCase(name)}: ${env === "process" ? "process.env." : "import.meta.env."}${key}`;
-      })
-      .join(sep) + (isEnv ? "\n" : "")
-  );
-};
+const getCfg = (c: object, p: string = '', t: 'file' | 'config' = 'file', e: 'process' | 'import' = 'process') => {
+	const isF = t === 'file'
+	const prefix = constant(p)
+	return (
+		Object.entries(c)
+			.map(v => {
+				const name = constant(v[0])
+				const key = `${prefix && !name.includes(prefix) ? `${prefix}_` : ''}${name}`
+				return isF ? `${key}=${v[1]}` : `${camel(name)}: ${e === 'process' ? 'process.env.' : 'import.meta.env.'}${key}`
+			})
+			.join(isF ? '\n' : ',\n ') + (isF ? '\n' : '')
+	)
+}
 
-const configEnvFile = async (file: string, { destination, extension, template, env, merge }: Options = {}) => {
-  try {
-    if (!file) throw new Error("File is required");
-    if (env && !["process", "import"].includes(env)) throw Error(`invalid value '${env}' to option 'env'.`);
+export const configEnvFile = async (file: string, options: Options = {}) => {
+	const {destination: dest = '.', extension: ext = 'local', prefix, env} = options
+	try {
+		if (!file) throw new Error('File is required')
+		if (env && !['process', 'import'].includes(env)) throw Error(`recived '${env}' expected 'process' or 'import'`)
 
-    let config = Object.fromEntries(
-      Object.entries(JSON.parse(await readFile(resolve(file), "utf8"))).map((v) => [constantCase(v[0]), v[1]])
-    );
-    if (Array.isArray(config)) throw Error("error: invalid or empty config");
-    if (merge) config = { ...parse(await readFile(resolve(merge), "utf8")), ...config };
+		const cfgFile = JSON.parse(await readFile(resolve(file), 'utf8'))
+		let cfg = Object.fromEntries(Object.entries(cfgFile).map(v => [constant(v[0]), v[1]]))
 
-    await writeFile(resolve(destination || ".", `.env.${extension || "local"}`), generate(config, { temp: template }));
-    const data = generate(config, { temp: template, type: "file", env, sep: ",\n  " });
-    const newConfig = `const config = { \n  ${data}\n}`;
-
-    console.log(`Check your .env.${extension || "local"} file\nYour config:\n${newConfig}`);
-  } catch (error: any) {
-    console.error("error:", error.message);
-  }
-};
-
-export default configEnvFile;
+		await writeFile(resolve(dest, `.env.${ext}`), getCfg(cfg, prefix))
+		console.log(`Check your .env.${ext}\nyour config:\nconst config = { \n ${getCfg(cfg, prefix, 'config', env)}\n}`)
+	} catch (e: any) {
+		console.error('error:', e.message)
+	}
+}
