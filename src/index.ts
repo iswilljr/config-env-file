@@ -1,10 +1,27 @@
 import {readFile, writeFile} from 'fs/promises'
 import {resolve} from 'path'
-import {noCase as c} from 'no-case'
 
-const constant = (s: string) => c(s, {delimiter: '_', transform: str => str.toUpperCase()})
-const camel = (s: string) =>
-	c(s, {delimiter: '', transform: (s, i) => (i === 0 ? s.toLowerCase() : `${s.charAt(0)}${s.slice(1).toLowerCase()}`)})
+function c(input: string, delimiter: string, transform: (part: string, index: number, parts: string[]) => string) {
+	const splitRegexp = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g]
+	const stripRegexp = /[^A-Z0-9]+/gi
+
+	function replace(input: string, re: RegExp | RegExp[], value: string) {
+		if (re instanceof RegExp) return input.replace(re, value)
+		return re.reduce((input, re) => input.replace(re, value), input)
+	}
+
+	let result = replace(replace(input, splitRegexp, '$1\0$2'), stripRegexp, '\0')
+	let start = 0
+	let end = result.length
+
+	while (result.charAt(start) === '\0') start++
+	while (result.charAt(end - 1) === '\0') end--
+
+	return result.slice(start, end).split('\0').map(transform).join(delimiter)
+}
+
+const constant = (s: string) => c(s, '_', str => str.toUpperCase())
+const camel = (s: string) => c(s, '', (s, i) => (i === 0 ? s.toLowerCase() : `${s.charAt(0)}${s.slice(1).toLowerCase()}`))
 
 type Options = {
 	destination?: string

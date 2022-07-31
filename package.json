@@ -1,6 +1,6 @@
 {
 	"name": "config-env-file",
-	"version": "0.0.2-experimental",
+	"version": "3.2.1",
 	"description": "A command line to generate a .env file based on a Config",
 	"license": "ISC",
 	"main": "lib/index.js",
@@ -23,8 +23,7 @@
 		"env"
 	],
 	"dependencies": {
-		"no-case": "^3.0.4",
-		"sade": "^1.8.1"
+		"sade": "1.8.1"
 	},
 	"devDependencies": {
 		"@types/node": "17.0.29",
@@ -32,6 +31,5 @@
 		"rimraf": "3.0.2",
 		"typescript": "4.7.4"
 	},
-	"repository": "git+https://github.com/iswilljr/config-env-file.git",
-	"bugs": "https://github.com/iswilljr/config-env-file/issues"
+	"repository": "git+https://github.com/iswilljr/config-env-file.git"
 }
