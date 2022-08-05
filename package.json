@@ -1,21 +1,21 @@
 {
 	"name": "config-env-file",
-	"version": "3.2.1",
+	"version": "3.2.2",
 	"description": "A command line to generate a .env file based on a Config",
 	"license": "ISC",
 	"main": "lib/index.js",
 	"author": "iswilljr",
 	"type": "module",
-	"types": "./lib/index.d.ts",
+	"types": "lib/index.d.ts",
 	"files": [
-		"lib",
-		"README.md"
+		"lib"
 	],
 	"bin": {
 		"cef": "lib/bin.js"
 	},
 	"scripts": {
-		"build": "tsc && rimraf lib/bin.d.ts && prettier lib --write",
+    "clean": "rimraf lib/**/*.js dist",
+		"build": "tsc && swc dist -d lib",
 		"prepublishOnly": "yarn build"
 	},
 	"keywords": [
@@ -26,9 +26,11 @@
 		"sade": "1.8.1"
 	},
 	"devDependencies": {
+		"@swc/cli": "0.1.57",
+		"@swc/core": "1.2.223",
 		"@types/node": "17.0.29",
 		"prettier": "2.6.2",
-		"rimraf": "3.0.2",
+		"rimraf": "^3.0.2",
 		"typescript": "4.7.4"
 	},
 	"repository": "git+https://github.com/iswilljr/config-env-file.git"

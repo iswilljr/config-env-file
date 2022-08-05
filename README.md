@@ -23,4 +23,11 @@ cef ./config.json
 #   KEY=2
 ```
 
+## Options
+
+- `destination`: destination path to env file. default `"."`.
+- `extension`: extension to env file name. default `"local"`.
+- `prefix`: prefix to variables name. default `""`.
+- `env`: how to access variables. choices process, import. default `"process"`.
+
 Run `cef --help` for more information.
