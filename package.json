@@ -1,37 +1,52 @@
 {
-	"name": "config-env-file",
-	"version": "3.2.2",
-	"description": "A command line to generate a .env file based on a Config",
-	"license": "ISC",
-	"main": "lib/index.js",
-	"author": "iswilljr",
-	"type": "module",
-	"types": "lib/index.d.ts",
-	"files": [
-		"lib"
-	],
-	"bin": {
-		"cef": "lib/bin.js"
-	},
-	"scripts": {
+  "name": "config-env-file",
+  "version": "3.2.3",
+  "description": "A command line to generate a .env file based on a Config",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "author": "iswilljr",
+  "type": "module",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "bin": {
+    "cef": "lib/bin.js",
+    "config-env-file": "lib/bin.js"
+  },
+  "scripts": {
     "clean": "rimraf lib/**/*.js dist",
-		"build": "tsc && swc dist -d lib",
-		"prepublishOnly": "yarn build"
-	},
-	"keywords": [
-		"config",
-		"env"
-	],
-	"dependencies": {
-		"sade": "1.8.1"
-	},
-	"devDependencies": {
-		"@swc/cli": "0.1.57",
-		"@swc/core": "1.2.223",
-		"@types/node": "17.0.29",
-		"prettier": "2.6.2",
-		"rimraf": "^3.0.2",
-		"typescript": "4.7.4"
-	},
-	"repository": "git+https://github.com/iswilljr/config-env-file.git"
+    "build": "tsc && swc dist -d lib",
+    "lint": "eslint .",
+    "format": "prettier --write --ignore-unknown .",
+    "prepublishOnly": "eslint . && yarn build",
+    "prepare": "husky install"
+  },
+  "keywords": [
+    "config",
+    "env"
+  ],
+  "dependencies": {
+    "sade": "1.8.1"
+  },
+  "devDependencies": {
+    "@swc/cli": "0.1.57",
+    "@swc/core": "1.2.223",
+    "@types/node": "17.0.29",
+    "@typescript-eslint/eslint-plugin": "5.33.1",
+    "@typescript-eslint/parser": "5.33.1",
+    "eslint": "8.22.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-config-standard-with-typescript": "22.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.2.4",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-promise": "6.0.0",
+    "husky": "8.0.1",
+    "lint-staged": "13.0.3",
+    "prettier": "2.6.2",
+    "rimraf": "^3.0.2",
+    "typescript": "4.7.4"
+  },
+  "repository": "git+https://github.com/iswilljr/config-env-file.git"
 }
