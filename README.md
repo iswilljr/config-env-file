@@ -4,7 +4,7 @@
 
 ## Why?
 
-If you have a config in a json format and you don't want to expose your config to the public, make a `.env` file by hand with the json file may take a while. This command will generate a `.env` file for you.
+If you have a config in a json format and you don't want to expose your config to the public, you can pass it to a `.env` file but make a `.env` file by hand with the json file may take a while. This command will generate a `.env` file for you.
 
 ## Install
 

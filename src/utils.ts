@@ -19,7 +19,7 @@ function noCase(str: string, delimiter: string, transform: (str: string, index: 
 }
 
 // Adapted from: https://github.com/blakeembrey/change-case/blob/master/packages/camel-case
-export function toConstantCase(str: string) {
+function toConstantCase(str: string) {
   return noCase(str, "_", (str) => str.toUpperCase());
 }
 
