@@ -20,4 +20,4 @@ cef
   .example("config.json -p my_app # creates env vars with prefix MY_APP")
   .example("config.json -E import # output will be print with import.meta.env");
 
-cef.action(configEnvFile).parse(process.argv);
+cef.action((file, options) => configEnvFile(file, { ...options, exitOnError: true })).parse(process.argv);
