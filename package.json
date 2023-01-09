@@ -12,13 +12,12 @@
     "index.d.ts"
   ],
   "bin": {
-    "cef": "lib/bin.js",
-    "config-env-file": "lib/bin.js"
+    "cef": "src/bin.js"
   },
   "scripts": {
     "lint": "eslint .",
     "format": "prettier --write --ignore-unknown .",
-    "prepublishOnly": "eslint . && yarn build",
+    "prepublishOnly": "eslint .",
     "prepare": "husky install"
   },
   "keywords": [
