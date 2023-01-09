@@ -1,6 +1,6 @@
 {
   "name": "config-env-file",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "A command line to generate a .env file based on a Config",
   "license": "ISC",
   "main": "src/index.js",
