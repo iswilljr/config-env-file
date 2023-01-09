@@ -30,8 +30,6 @@ declare module "config-env-file" {
      * ```
      * @default null */
     prefix?: string;
-    /** @default false */
-    exitOnError?: boolean;
   }
 
   export declare const configEnvFile: (file: string, options?: Options) => Promise<void>;
