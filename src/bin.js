@@ -11,6 +11,7 @@ cef
   .option("-d, --destination <d>", "destination path to env file")
   .option("-e, --extension <e>", "extension to env file name")
   .option("-p, --prefix <p>", "prefix to variables name")
+  .option("-s, --silent", "skip console logs", false)
   .option("-E, --env <e>", "how to access variables");
 
 cef

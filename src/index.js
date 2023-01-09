@@ -17,10 +17,9 @@ const getConfig = (config, _prefix = "", type = "file", env = "process") => {
   return newConfig.join(isFile ? "\n" : ",\n ") + (isFile ? "\n" : "");
 };
 
-export const configEnvFile = async (
-  file,
-  { destination = ".", extension: e, prefix: p, env, exitOnError = false } = {}
-) => {
+export const configEnvFile = async (file, options = {}) => {
+  const { destination = ".", extension: e, prefix: p, env, exitOnError = false, silent = true } = options;
+
   try {
     const prefix = p ? filenamify(p, { replacement: "." }) : undefined;
     const extension = e ? filenamify(e, { replacement: "." }) || "local" : "local";
@@ -31,7 +30,7 @@ export const configEnvFile = async (
     const config = JSON.parse(await fs.readFile(file, "utf8"));
     await fs.writeFile(resolve(destination, `.env.${extension}`), getConfig(config, prefix));
 
-    console.log(`const config = { \n ${getConfig(config, prefix, "config", env)}\n}`);
+    if (!silent) console.log(`const config = { \n ${getConfig(config, prefix, "config", env)}\n}`);
   } catch (e) {
     console.error("error:", e.message);
     exitOnError && process.exit(1);
