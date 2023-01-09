@@ -3,7 +3,7 @@
   "version": "3.3.0",
   "description": "A command line to generate a .env file based on a Config",
   "license": "ISC",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "author": "iswilljr",
   "type": "module",
   "types": "index.d.ts",
