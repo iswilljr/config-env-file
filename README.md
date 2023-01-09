@@ -33,49 +33,24 @@ cef ./config.json
 
 When you use firebase in your app, you might not want to expose the firebase config. Pass the config to an `.env` file may take a while doing it by hand. This is a simple example to generate a `.env` file from a firebase config.
 
-`run:`
-
 ```bash
 touch firebase.config.json
 # copy the firebase config to firebase.config.json
+# firebase.config.json:
+# { "apiKey": "example", "authDomain": "example.firebaseapp.com", ... }
+
 cef firebase.config.json
-```
+# .env.local:
+# API_KEY=example
+# AUTH_DOMAIN=example.firebaseapp.com
+# ...
 
-`firebase.config.json:`
-
-```json
-{
-  "apiKey": "example",
-  "authDomain": "example.firebaseapp.com",
-  "projectId": "example",
-  "storageBucket": "example.appspot.com",
-  "messagingSenderId": "example",
-  "appId": "1:example:web:example"
-}
-```
-
-`.env.local:`
-
-```env
-API_KEY=example
-AUTH_DOMAIN=example.firebaseapp.com
-PROJECT_ID=example
-STORAGE_BUCKET=example.appspot.com
-MESSAGING_SENDER_ID=example
-APP_ID=1:example:web:example
-```
-
-`output:`
-
-```javascript
-const config = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID,
-};
+# output:
+# const config = {
+#   apiKey: process.env.API_KEY,
+#   authDomain: process.env.AUTH_DOMAIN
+#   ...
+# }
 ```
 
 ## Options
@@ -83,6 +58,7 @@ const config = {
 - `destination`: destination path to env file. default `"."`.
 - `extension`: extension to env file name. default `"local"`.
 - `prefix`: prefix to variables name. default `undefined`.
+- `silent`: skip console logs. default `false`.
 - `env`: how to access variables. choices `"process"`, `"import"`. default `"process"`.
 
 Run `cef --help` for more information.
