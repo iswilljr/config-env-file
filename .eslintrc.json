@@ -1,13 +1,3 @@
 {
-  "extends": ["standard-with-typescript", "prettier"],
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  },
-  "plugins": ["prettier"],
-  "rules": {
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/strict-boolean-expressions": "off",
-    "@typescript-eslint/promise-function-async": "off",
-    "prettier/prettier": "error"
-  }
+  "extends": ["standard", "plugin:prettier/recommended"]
 }

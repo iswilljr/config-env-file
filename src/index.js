@@ -3,22 +3,7 @@ import { resolve } from "path";
 import filenamify from "filenamify";
 import { constantCase } from "constant-case";
 
-type GetConfig = (
-  config: Record<string, string>,
-  prefix?: string,
-  type?: "file" | "config",
-  env?: "process" | "import"
-) => string;
-
-interface Options {
-  destination?: string;
-  extension?: string;
-  prefix?: string;
-  env?: "process" | "import";
-  exitOnError?: boolean;
-}
-
-const getConfig: GetConfig = (config, _prefix = "", type = "file", env = "process") => {
+const getConfig = (config, _prefix = "", type = "file", env = "process") => {
   const isFile = type === "file";
   const prefix = constantCase(_prefix);
 
@@ -33,8 +18,8 @@ const getConfig: GetConfig = (config, _prefix = "", type = "file", env = "proces
 };
 
 export const configEnvFile = async (
-  file: string,
-  { destination = ".", extension: e, prefix: p, env, exitOnError = false }: Options = {}
+  file,
+  { destination = ".", extension: e, prefix: p, env, exitOnError = false } = {}
 ) => {
   try {
     const prefix = p ? filenamify(p, { replacement: "." }) : undefined;
@@ -47,7 +32,7 @@ export const configEnvFile = async (
     await fs.writeFile(resolve(destination, `.env.${extension}`), getConfig(config, prefix));
 
     console.log(`const config = { \n ${getConfig(config, prefix, "config", env)}\n}`);
-  } catch (e: any) {
+  } catch (e) {
     console.error("error:", e.message);
     exitOnError && process.exit(1);
   }
