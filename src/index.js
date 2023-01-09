@@ -32,7 +32,10 @@ export const configEnvFile = async (file, options = {}) => {
 
     if (!silent) console.log(`const config = { \n ${getConfig(config, prefix, "config", env)}\n}`);
   } catch (e) {
-    console.error("error:", e.message);
-    exitOnError && process.exit(1);
+    if (exitOnError) {
+      console.error("error:", e.message);
+      process.exit(1);
+    }
+    throw Error(e.message);
   }
 };
