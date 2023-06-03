@@ -26,20 +26,17 @@
   ],
   "dependencies": {
     "constant-case": "3.0.4",
-    "filenamify": "5.1.1",
+    "filenamify": "6.0.0",
     "sade": "1.8.1"
   },
   "devDependencies": {
-    "eslint": "8.31.0",
-    "eslint-config-prettier": "8.6.0",
-    "eslint-config-standard": "17.0.0",
-    "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-n": "15.6.0",
+    "eslint": "8.42.0",
+    "eslint-config-prettier": "8.8.0",
+    "eslint-config-standard": "17.1.0",
     "eslint-plugin-prettier": "4.2.1",
-    "eslint-plugin-promise": "6.1.1",
     "husky": "8.0.3",
-    "lint-staged": "13.1.0",
-    "prettier": "2.8.2"
+    "lint-staged": "13.2.2",
+    "prettier": "2.8.8"
   },
   "repository": "git+https://github.com/iswilljr/config-env-file.git"
 }
