@@ -29,7 +29,14 @@ cef.action((file, options) => runCef(file, options)).parse(process.argv);
 
 async function runCef(file, options) {
   try {
-    await configEnvFile(file, options);
+    await configEnvFile(file, {
+      destination: options.destination,
+      extension: options.extension,
+      prefix: options.prefix,
+      includeObjects: options.i,
+      noQuotes: options.n,
+      singleQuotes: options.q,
+    });
 
     const config = await getConfig(file);
     const configString = stringifyConfig({ config, env: options.env, includeObjects: options.i, prefix: options.p });
