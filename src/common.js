@@ -13,7 +13,7 @@ export function getVariableKey(key, _prefix) {
   const name = constantCase(key);
   const prefix = constantCase(_prefix ?? "");
 
-  return `${prefix && !name.includes(prefix) ? `${prefix}_` : ""}${name}`;
+  return `${prefix && !name.startsWith(prefix) ? `${prefix}_` : ""}${name}`;
 }
 
 export function getConfigVariableKeys({ _config, includeObjects, prefix }) {
