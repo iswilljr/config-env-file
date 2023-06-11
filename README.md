@@ -23,10 +23,13 @@ yarn global add config-env-file
 cef ./config.json
 # config.json: { "api": 1, "key": 2 }
 # output:
-#   const config = { api: process.env.API, key: process.env.KEY }
+#   const config = {
+#     api: process.env.API,
+#     key: process.env.KEY
+#   }
 # .env.local:
-#   API=1
-#   KEY=2
+#   API="1"
+#   KEY="2"
 ```
 
 ### Example with a firebase project
@@ -41,8 +44,8 @@ touch firebase.config.json
 
 cef firebase.config.json
 # .env.local:
-# API_KEY=example
-# AUTH_DOMAIN=example.firebaseapp.com
+# API_KEY="example"
+# AUTH_DOMAIN="example.firebaseapp.com"
 # ...
 
 # output:
@@ -55,10 +58,57 @@ cef firebase.config.json
 
 ## Options
 
+### Prefix
+
+add prefix to variables name. default `undefined`
+
+```bash
+cef ./config.json --prefix public
+# config.json: { "apiUrl": "https://..." }
+# output:
+#   const config = {
+#     apiUrl: process.env.PUBLIC_API_URL,
+#   }
+# .env.local:
+#   PUBLIC_API_URL="https://..."
+```
+
+### Include Objects Values
+
+whether to include object values or not. default `false`.
+
+```bash
+# config: { "api": 6, "client": { "id": 1, "secret": 6 } }
+
+cef ./config.json
+# .env.local:
+#   API="6"
+
+cef ./config.json --include-objects
+# .env.local:
+#   API="6"
+#   CLIENT="{"id":1,"secret":6}"
+```
+
+### Env
+
+how to access variables. choices `"process"`, `"import"`. default `"process"`.
+
+```bash
+cef ./config.json --env import
+# output:
+#   const config = {
+#     api: import.meta.env.API,
+#     key: import.meta.env.KEY
+#   }
+```
+
+### Other options
+
 - `destination`: destination path to env file. default `"."`.
 - `extension`: extension to env file name. default `"local"`.
-- `prefix`: prefix to variables name. default `undefined`.
+- `single-quotes`: use single quotes in env values. default `false`.
+- `no-quotes`: don't add quotes to env values. default `false`.
 - `silent`: skip console logs. default `false`.
-- `env`: how to access variables. choices `"process"`, `"import"`. default `"process"`.
 
 Run `cef --help` for more information.

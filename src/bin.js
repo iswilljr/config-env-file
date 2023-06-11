@@ -9,11 +9,14 @@ const pkg = createRequire(import.meta.url)("../package.json");
 const cef = sade("cef <config-file>", true).version(pkg.version).describe(pkg.description);
 
 cef
-  .option("-d, --destination <d>", "destination path to env file")
+  .option("-d, --destination <d>", "destination path to env file", ".")
   .option("-e, --extension <e>", "extension to env file name")
   .option("-p, --prefix <p>", "prefix to variables name")
+  .option("-q, --single-quotes", "use single quotes", false)
+  .option("-n, --no-quotes", "don't add quotes to env values", false)
+  .option("-i, --include-objects", "include object values", false)
   .option("-s, --silent", "skip console logs", false)
-  .option("-E, --env <e>", "how to access variables");
+  .option("-E, --env <e>", "how to access variables  (options: process, import)", "process");
 
 cef
   .example("config.json # creates .env.local file with variables from config.json")
@@ -29,7 +32,7 @@ async function runCef(file, options) {
     await configEnvFile(file, options);
 
     const config = await getConfig(file);
-    const configString = stringifyConfig(config, options.env, options.prefix);
+    const configString = stringifyConfig({ config, env: options.env, includeObjects: options.i, prefix: options.p });
 
     if (options.silent) return;
 
