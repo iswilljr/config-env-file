@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { createRequire } from "module";
 import sade from "sade";
+import { getConfig, stringifyConfig } from "./common.js";
 import { configEnvFile } from "./index.js";
 
 const pkg = createRequire(import.meta.url)("../package.json");
@@ -21,4 +22,20 @@ cef
   .example("config.json -p my_app # creates env vars with prefix MY_APP")
   .example("config.json -E import # output will be print with import.meta.env");
 
-cef.action((file, options) => configEnvFile(file, { ...options, exitOnError: true })).parse(process.argv);
+cef.action((file, options) => runCef(file, options)).parse(process.argv);
+
+async function runCef(file, options) {
+  try {
+    await configEnvFile(file, options);
+
+    const config = await getConfig(file);
+    const configString = stringifyConfig(config, options.env, options.prefix);
+
+    if (options.silent) return;
+
+    console.info(configString);
+  } catch (error) {
+    console.error(error.message);
+    process.exit(1);
+  }
+}
