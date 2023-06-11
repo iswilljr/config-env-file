@@ -7,13 +7,16 @@ declare module "config-env-file" {
      * ```
      * @default "." */
     destination?: string;
-    /** how to access variables
-     * @example ```js
-     * await configEnvFile("config.json", {env:"import"})
-     * // will print your new config accessing the variables with import
-     * ```
-     * @default "process" */
-    env?: "process" | "import";
+    /**
+     * whether to include object values or not
+     * @default false
+     */
+    includeObjects?: boolean;
+    /**
+     * whether to add quotes or not
+     * @default false
+     */
+    noQuotes?: boolean;
     /** extension to env file name
      * @example
      * ```js
@@ -30,6 +33,11 @@ declare module "config-env-file" {
      * ```
      * @default null */
     prefix?: string;
+    /**
+     * whether to use single quotes or not
+     * @default false
+     */
+    singleQuotes?: boolean;
   }
 
   export declare const configEnvFile: (file: string, options?: Options) => Promise<void>;
