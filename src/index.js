@@ -1,22 +1,13 @@
 import fs from "fs/promises";
 import path from "path";
-import filenamify from "filenamify";
-import { getConfig, stringifyEnvFileConfig } from "./common.js";
-
-const VALID_ENV_VALUES = ["process", "import"];
+import { getConfig, getOptions, stringifyEnvFileConfig } from "./common.js";
 
 export async function configEnvFile(file, options = {}) {
-  const { destination = ".", e, i: includeObjects, n: noQuotes, prefix, q: singleQuotes, env = "process" } = options;
+  const { destination, extension, prefix, includeObjects, noQuotes, singleQuotes } = getOptions(options);
 
   if (!file) {
     throw new Error("Config file is required");
   }
-
-  if (!VALID_ENV_VALUES.includes(env)) {
-    throw Error(`received '${env}' expected 'process' or 'import'`);
-  }
-
-  const extension = (e && filenamify(e, { replacement: "." })) || "local";
 
   const filePath = path.resolve(destination, `.env.${extension}`);
 

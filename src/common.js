@@ -1,5 +1,8 @@
 import fs from "fs/promises";
+import filenamify from "filenamify";
 import { constantCase } from "constant-case";
+
+export const VALID_ENV_VALUES = ["process", "import"];
 
 export async function getConfig(file) {
   const json = await fs.readFile(file, "utf8");
@@ -18,6 +21,7 @@ export function getConfigVariableKeys({ _config, includeObjects, prefix }) {
     if (typeof value === "object" && !includeObjects) return null;
 
     const name = getVariableKey(key, prefix);
+
     return { name, key, value };
   });
 
@@ -40,4 +44,28 @@ export function stringifyEnvFileConfig({ config: _config, includeObjects, prefix
   });
 
   return `${config.join("\n")}\n`;
+}
+
+export function getOptions(options) {
+  const { destination = ".", extension: e, prefix, includeObjects, noQuotes, singleQuotes } = options;
+
+  if (typeof destination !== "string") typeError("destination", typeof destination);
+  if (prefix != null && typeof prefix !== "string") typeError("prefix", typeof prefix);
+  if (e != null && typeof e !== "string") typeError("extension", typeof e);
+  if (destination === "") typeError("destination", "empty string");
+
+  const extension = (e && filenamify(e, { replacement: "." })) || "local";
+
+  return {
+    destination,
+    extension,
+    prefix,
+    includeObjects: Boolean(includeObjects),
+    noQuotes: Boolean(noQuotes),
+    singleQuotes: Boolean(singleQuotes),
+  };
+}
+
+function typeError(name, value) {
+  throw TypeError(`Invalid argument '${name}', expected 'string' got ${value}`);
 }
