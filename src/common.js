@@ -49,10 +49,10 @@ export function stringifyEnvFileConfig({ config: _config, includeObjects, prefix
 export function getOptions(options) {
   const { destination = ".", extension: e, prefix, includeObjects, noQuotes, singleQuotes } = options;
 
-  if (typeof destination !== "string") typeError("destination", typeof destination);
-  if (prefix != null && typeof prefix !== "string") typeError("prefix", typeof prefix);
-  if (e != null && typeof e !== "string") typeError("extension", typeof e);
-  if (destination === "") typeError("destination", "empty string");
+  if (typeof destination !== "string") typeError("destination", "string", typeof destination);
+  if (prefix != null && typeof prefix !== "string") typeError("prefix", "string", typeof prefix);
+  if (e != null && typeof e !== "string") typeError("extension", "string", typeof e);
+  if (destination === "") typeError("destination", "string", "empty string");
 
   const extension = (e && filenamify(e, { replacement: "." })) || "local";
 
@@ -66,6 +66,6 @@ export function getOptions(options) {
   };
 }
 
-function typeError(name, value) {
-  throw TypeError(`Invalid argument '${name}', expected 'string' got ${value}`);
+export function typeError(name, expected, value) {
+  throw TypeError(`Invalid argument '${name}', expected '${expected}' got '${value}'`);
 }

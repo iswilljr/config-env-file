@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { createRequire } from "module";
 import sade from "sade";
-import { getConfig, stringifyConfig } from "./common.js";
+import { VALID_ENV_VALUES, getConfig, stringifyConfig, typeError } from "./common.js";
 import { configEnvFile } from "./index.js";
 
 const pkg = createRequire(import.meta.url)("../package.json");
@@ -29,6 +29,10 @@ cef.action((file, options) => runCef(file, options)).parse(process.argv);
 
 async function runCef(file, options) {
   try {
+    const env = options.env ?? "process";
+
+    if (!VALID_ENV_VALUES.includes(env)) typeError("env", VALID_ENV_VALUES.map((v) => `"${v}"`).join(" | "), env);
+
     await configEnvFile(file, {
       destination: options.destination,
       extension: options.extension,
