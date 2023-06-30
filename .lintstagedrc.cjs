@@ -1,4 +1,4 @@
 module.exports = {
-  "*.{js,jsx}": () => ["yarn lint --fix"],
-  "*": () => ["yarn format"],
+  "*.{js,jsx}": () => ["pnpm lint --fix"],
+  "*": () => ["pnpm format"],
 };
