@@ -42,10 +42,10 @@ async function runCef(file, options) {
       singleQuotes: options.q,
     });
 
+    if (options.silent) return;
+
     const config = await getConfig(file);
     const configString = stringifyConfig({ config, env: options.env, includeObjects: options.i, prefix: options.p });
-
-    if (options.silent) return;
 
     console.info(configString);
   } catch (error) {
