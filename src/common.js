@@ -1,6 +1,10 @@
 import fs from "fs/promises";
 import filenamify from "filenamify";
-import { constantCase } from "constant-case";
+import { snakeCase, camelCase } from "tiny-case";
+
+function constantCase(str) {
+  return snakeCase(str).toUpperCase();
+}
 
 export const VALID_ENV_VALUES = ["process", "import"];
 
@@ -32,7 +36,7 @@ export function stringifyConfig({ config: _config, env, includeObjects, prefix }
   const envKey = env === "process" ? "process.env." : "import.meta.env.";
 
   const config = getConfigVariableKeys({ _config, includeObjects, prefix }).map(
-    ({ name, key }) => `${key}: ${envKey}${name}`
+    ({ name, key }) => `${camelCase(key)}: ${envKey}${name}`
   );
 
   return `const config = { \n ${config.join(",\n ")}\n}`;

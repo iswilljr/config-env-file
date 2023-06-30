@@ -25,9 +25,9 @@
     "env"
   ],
   "dependencies": {
-    "constant-case": "3.0.4",
     "filenamify": "6.0.0",
-    "sade": "1.8.1"
+    "sade": "1.8.1",
+    "tiny-case": "1.0.3"
   },
   "devDependencies": {
     "eslint": "8.42.0",
